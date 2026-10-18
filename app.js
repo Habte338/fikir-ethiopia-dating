@@ -2215,59 +2215,115 @@ function setupSettingsModal() {
 }
 
 // ============================================================================
-// 15. WEB LOGIN & TELEGRAM/FAYDA AUTH SYSTEM
+// // ============================================================================
+// 15. WEB LOGIN (Telegram link + 6-digit code, verified on the server)
 // ============================================================================
 
 function setupAuthModal() {
   const modal = document.getElementById("authModalBackdrop");
   const loginNavBtn = document.getElementById("headerLoginBtn");
   const closeBtn = document.getElementById("closeAuthModalBtn");
+  const authForm = document.getElementById("authLoginForm");
+  const phoneInput = document.getElementById("authLoginPhone");
 
-  if (loginNavBtn) {
-    loginNavBtn.addEventListener("click", () => {
-      modal.style.display = "flex";
-    });
-  }
+  if (!modal || !authForm) return;
 
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-  }
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) modal.style.display = "none";
+  // Remove the demo shortcuts from the live login screen
+  ["btnDemoHabte", "btnDemoGuest", "btnTelegramQuickLogin"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
   });
+  if (phoneInput) phoneInput.style.display = "none";
 
-  // Telegram Quick 1-Click Authentication
-  const btnTelegram = document.getElementById("btnTelegramQuickLogin");
-  if (btnTelegram) {
-    btnTelegram.addEventListener("click", () => {
-      soundFx.playMatchCelebration();
-      state.isLoggedIn = true;
-      state.currentUser.telegram = "@Habte338";
-      state.currentUser.isTelegramConnected = true;
-      state.isFaydaVerified = true;
-      saveUserSession();
-      updateUserAuthUI();
-      modal.style.display = "none";
+  const submitBtn = authForm.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.textContent =
+      state.currentLang === "am" ? "የቴሌግራም ሊንክ ላክልኝ" : "Send me a Telegram login link";
+  }
+
+  // Code box, created here so no HTML edits are needed
+  let codeStep = null;
+
+  function showCodeStep() {
+    if (codeStep) {
+      codeStep.style.display = "block";
+      return;
+    }
+    codeStep = document.createElement("div");
+    codeStep.id = "authCodeStep";
+    codeStep.innerHTML = `
+      <p style="margin:12px 0 8px;">
+        ${state.currentLang === "am"
+          ? "ቦቱ የላከልዎን 6 አሃዝ ኮድ ያስገቡ (በ5 ደቂቃ ውስጥ)።"
+          : "Enter the 6-digit code the bot sent you. It expires in 5 minutes."}
+      </p>
+      <input id="authCodeInput" type="text" inputmode="numeric" autocomplete="one-time-code"
+        maxlength="6" placeholder="123456"
+        style="width:100%;padding:10px;font-size:18px;letter-spacing:6px;text-align:center;">
+      <button type="button" id="authCodeSubmit" style="margin-top:10px;width:100%;padding:10px;">
+        ${state.currentLang === "am" ? "ኮዱን አረጋግጥ" : "Verify code"}
+      </button>
+      <p id="authCodeError" style="color:#c0392b;margin-top:8px;min-height:1em;"></p>`;
+    authForm.appendChild(codeStep);
+    document.getElementById("authCodeSubmit").addEventListener("click", verifyCode);
+  }
+
+  // Step 1: ask the server for a one-time Telegram link
+  async function startLogin(e) {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/auth/start", { method: "POST" });
+      const data = await res.json();
+      if (!res.ok || !data.link) throw new Error("start_failed");
+
+      // Opens the bot. If the browser blocks the new tab, open it in this tab.
+      const w = window.open(data.link, "_blank");
+      if (!w) window.location.href = data.link;
+
+      showCodeStep();
+    } catch (err) {
       showToast(
         state.currentLang === "am"
-          ? "🎉 እንኳን ደህና መጡ ሀብተ (@Habte338)! በቴሌግራም በተሳካ ሁኔታ ገብተዋል።"
-          : "🎉 Welcome back Habte (@Habte338)! Logged in via 1-Click Telegram.",
-        "✈️"
+          ? "ሊንኩን መፍጠር አልተቻለም። እንደገና ይሞክሩ።"
+          : "Could not create the login link. Please try again.",
+        "⚠️"
       );
-    });
+    }
   }
 
-  // Phone / Fayda Login Form Submit
-  const authForm = document.getElementById("authLoginForm");
-  if (authForm) {
-    authForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const phoneVal = document.getElementById("authLoginPhone").value.trim();
+  // Step 2: check the 6-digit code on the server
+  async function verifyCode() {
+    const input = document.getElementById("authCodeInput");
+    const errEl = document.getElementById("authCodeError");
+    const code = input.value.trim();
+
+    if (!/^\d{6}$/.test(code)) {
+      errEl.textContent = "Enter the 6 digits.";
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/auth/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        const messages = {
+          wrong_code: "Wrong code. Try again.",
+          code_expired: "This code expired. Start again.",
+          too_many_attempts: "Too many wrong tries. Start again.",
+          invalid_request: "Please start the login again from this page.",
+        };
+        errEl.textContent = messages[data.error] || "Something went wrong. Try again.";
+        return;
+      }
+
+      // The server has accepted the login and set the session cookie
       state.isLoggedIn = true;
-      if (phoneVal) state.currentUser.phone = phoneVal;
+      state.currentUser.isTelegramConnected = true;
       saveUserSession();
       updateUserAuthUI();
       modal.style.display = "none";
@@ -2275,50 +2331,27 @@ function setupAuthModal() {
       showToast(
         state.currentLang === "am"
           ? "✨ በተሳካ ሁኔታ ገብተዋል! መልካም የፍቅር ጊዜ።"
-          : "✨ Successfully authenticated with Fikir!",
+          : "✨ Logged in with Telegram!",
         "✨"
       );
-    });
+    } catch (err) {
+      errEl.textContent = "Network error. Check your connection and try again.";
+    }
   }
 
-  // Quick Demo Accounts
-  const demoHabte = document.getElementById("btnDemoHabte");
-  if (demoHabte) {
-    demoHabte.addEventListener("click", () => {
-      state.isLoggedIn = true;
-      state.currentUser.fullName = "Habte Mikael";
-      state.currentUser.telegram = "@Habte338";
-      state.currentUser.isTelegramConnected = true;
-      state.isFaydaVerified = true;
-      state.currentUser.fin = "4820 9182 3410";
-      saveUserSession();
-      updateUserAuthUI();
-      modal.style.display = "none";
-      soundFx.playBunaChime();
-      showToast(
-        state.currentLang === "am"
-          ? "🇪🇹 በሀብተ አካውንት ገብተዋል (በፋይዳና ቴሌግራም የተረጋገጠ)"
-          : "🇪🇹 Logged in as Habte (Fayda & Telegram Verified)!",
-        "🇪🇹"
-      );
+  // Wiring
+  if (loginNavBtn) {
+    loginNavBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
     });
   }
-
-  const demoGuest = document.getElementById("btnDemoGuest");
-  if (demoGuest) {
-    demoGuest.addEventListener("click", () => {
-      state.isLoggedIn = true;
-      state.currentUser.fullName = "Guest Explorer";
-      state.isFaydaVerified = false;
-      saveUserSession();
-      updateUserAuthUI();
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
       modal.style.display = "none";
-      showToast(
-        state.currentLang === "am"
-          ? "👤 እንደ እንግዳ ገብተዋል። ለሙሉ ክብር በፋይዳ ያረጋግጡ!"
-          : "👤 Browsing as Guest. Verify with Fayda to unlock full access!",
-        "👤"
-      );
     });
   }
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+  authForm.addEventListener("submit", startLogin);
 }
