@@ -1,0 +1,12 @@
+{
+  "name": "fikir-ethiopia-dating",
+  "version": "1.0.0",
+  "description": "Ethiopian cultural dating & matchmaking web app with Fayda National ID and Telebirr VIP",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["ethiopia", "dating", "habesha", "telebirr", "fayda"],
+  "author": "Fikir Team",
+  "license": "MIT"
+}
