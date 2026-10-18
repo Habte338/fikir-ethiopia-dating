@@ -6,7 +6,16 @@
   "scripts": {
     "start": "npx serve ."
   },
-  "keywords": ["ethiopia", "dating", "habesha", "telebirr", "fayda"],
+  "keywords": [
+    "ethiopia",
+    "dating",
+    "habesha",
+    "telebirr",
+    "fayda"
+  ],
   "author": "Fikir Team",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0"
+  }
 }
