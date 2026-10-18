@@ -228,7 +228,37 @@ const I18N = {
     simDesc: "Click below to simulate a friend joining and verifying via Fayda to watch your credits double live!",
     simBtn: "Simulate Friend Joining via Link (Trigger 2X Double)",
     spendCreditsTitle: "Redeem Your Free Credits:",
-    redeem: "Redeem"
+    redeem: "Redeem",
+
+    // Settings & Auth Localization (English)
+    signIn: "Sign In",
+    signOut: "Sign Out of Fikir (ውጣ)",
+    tabEditProfile: "Edit Profile",
+    tabSecurity: "Fayda & Telegram",
+    tabPreferences: "Preferences",
+    fullName: "Full Name (ሙሉ ስም):",
+    age: "Age (ዕድሜ):",
+    cityDistrict: "Location (ከተማ / ክፍለ ከተማ):",
+    faithBelief: "Faith (እምነት):",
+    occupation: "Occupation / Career:",
+    fastingCheckbox: "Fasting Friendly (ጾመኛ ነኝ 🥗)",
+    bunaCheckbox: "Traditional Buna Lover (የባህል ቡና ወዳጅ ☕)",
+    bioLabel: "About Me (ስለ እኔ):",
+    saveChanges: "Save Profile Changes (መረጃ መዝግብ)",
+    manageFayda: "Manage Fayda ID Certificate",
+    changeTelegram: "Switch Telegram Account",
+    interestedIn: "Interested in Meeting:",
+    ageRange: "Age Range Preference (18 - 40):",
+    welcomeBack: "Welcome to Fikir (እንኳን ደህና መጡ)",
+    authSubtitle: "Ethiopia's trusted cultural dating platform with Fayda National ID & Telegram security.",
+    signInTelegram: "Continue with Telegram (በቴሌግራም ግባ)",
+    instantVerifiedTg: "Instant 1-Click Ethiopian Login (@Habte338)",
+    orPhone: "OR LOG IN WITH ETHIOPIAN PHONE / FAYDA ID",
+    phoneOrFayda: "Mobile Number or Fayda FIN:",
+    smsCodeOrPin: "SMS Passcode or Fayda e-Signet OTP:",
+    rememberDevice: "Remember on this device (አስታውሰኝ)",
+    logInNow: "Log In to Fikir (ግባ)",
+    quickDemoAccounts: "Quick Access Demo Accounts:"
   },
   am: {
     tagline: "የኢትዮጵያውያን የፍቅርና የትዳር መድረክ",
@@ -327,7 +357,37 @@ const I18N = {
     simDesc: "ጓደኛዎ ገብቶ በፋይዳ ሲረጋገጥ ክሬዲትዎ እንዴት እጥፍ እንደሚሆን በቀጥታ ይመልከቱ!",
     simBtn: "ጓደኛ ሲገባና ሲረጋገጥ ሞክር (2X እጥፍ ቀስቅስ)",
     spendCreditsTitle: "ያገኙትን ነፃ ክሬዲት ይጠቀሙ:",
-    redeem: "ተጠቀም"
+    redeem: "ተጠቀም",
+
+    // Settings & Auth Localization (Amharic)
+    signIn: "ግባ",
+    signOut: "ከፍቅር መድረክ ውጣ",
+    tabEditProfile: "ፕሮፋይል አስተካክል",
+    tabSecurity: "ፋይዳና ቴሌግራም",
+    tabPreferences: "ምርጫዎች",
+    fullName: "ሙሉ ስም (እንደ መታወቂያዎ):",
+    age: "ዕድሜ:",
+    cityDistrict: "ከተማ / ክፍለ ከተማ:",
+    faithBelief: "እምነት:",
+    occupation: "የስራ መስክ:",
+    fastingCheckbox: "ጾመኛ ነኝ (የጾም ምግብ) 🥗",
+    bunaCheckbox: "የባህል ቡና ወዳጅ ☕",
+    bioLabel: "ስለ እኔ አጭር መግለጫ:",
+    saveChanges: "መረጃዬን መዝግብ",
+    manageFayda: "የፋይዳ መታወቂያ ሰርተፍኬት",
+    changeTelegram: "የቴሌግራም አካውንት ቀይር",
+    interestedIn: "የምፈልገው ፆታ:",
+    ageRange: "የዕድሜ ክልል ምርጫ (18 - 40):",
+    welcomeBack: "እንኳን ወደ ፍቅር በደህና መጡ",
+    authSubtitle: "በኢትዮጵያ አስተማማኙ የፍቅር መድረክ በፋይዳ ብሔራዊ መታወቂያና በቴሌግራም የተጠበቀ።",
+    signInTelegram: "በቴሌግራም በፍጥነት ግባ",
+    instantVerifiedTg: "የ1-ጠቅታ የፈጣን መግቢያ (@Habte338)",
+    orPhone: "ወይም በስልክ ቁጥርና በፋይዳ መታወቂያ ግባ",
+    phoneOrFayda: "የስልክ ቁጥር ወይም የፋይዳ FIN:",
+    smsCodeOrPin: "የኤስኤምኤስ ፓስኮድ ወይም የፋይዳ OTP:",
+    rememberDevice: "በዚህ መሳሪያ ላይ አስታውሰኝ",
+    logInNow: "ወደ ፍቅር ግባ",
+    quickDemoAccounts: "የሙከራ አካውንቶች:"
   }
 };
 
@@ -362,12 +422,33 @@ const INITIAL_CONVERSATIONS = [
 ];
 
 // ============================================================================
-// 2. APPLICATION STATE
+// 2. APPLICATION STATE & PERSISTENCE
 // ============================================================================
+
+const STORAGE_KEY = "fikir_ethiopia_user_session_v1";
 
 const state = {
   currentLang: "en",
   currentView: "discover",
+  isLoggedIn: true,
+  currentUser: {
+    fullName: "Habte Mikael",
+    nameAm: "ሀብተ ሚካኤል",
+    age: 26,
+    gender: "male",
+    city: "Addis Ababa - Bole",
+    occupation: "Software Entrepreneur & Builder",
+    faith: "Orthodox",
+    fasting: true,
+    bunaLover: true,
+    bio: "Passionate about Ethiopian tech, coffee ceremonies in Bole, and finding an authentic Habesha life partner.",
+    phone: "911 234 567",
+    telegram: "@Habte338",
+    isTelegramConnected: true,
+    isFaydaVerified: true,
+    fin: "4820 9182 3410",
+    avatar: "assets/ethiopian_man_profile1_1792309463785.jpg"
+  },
   isVip: false,
   freeLikesRemaining: 5,
   creditsBalance: 15,
@@ -375,7 +456,7 @@ const state = {
   faydaVerifiedFriendsCount: 2,
   isFaydaVerified: true,
   faydaUser: {
-    fullName: "Abebe Kebede Tesfaye",
+    fullName: "Habte Mikael",
     phone: "911 234 567",
     fin: "4820 9182 3410"
   },
@@ -392,6 +473,133 @@ const state = {
   matches: [...INITIAL_CONVERSATIONS],
   activeChatProfileId: 1
 };
+
+function saveUserSession() {
+  try {
+    const sessionData = {
+      isLoggedIn: state.isLoggedIn,
+      currentUser: state.currentUser,
+      isVip: state.isVip,
+      creditsBalance: state.creditsBalance,
+      freeLikesRemaining: state.freeLikesRemaining,
+      isFaydaVerified: state.isFaydaVerified,
+      invitedFriendsCount: state.invitedFriendsCount,
+      faydaVerifiedFriendsCount: state.faydaVerifiedFriendsCount
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionData));
+  } catch (e) {
+    console.warn("localStorage write failed:", e);
+  }
+}
+
+function loadUserSession() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const data = JSON.parse(saved);
+      if (typeof data.isLoggedIn === "boolean") state.isLoggedIn = data.isLoggedIn;
+      if (data.currentUser) state.currentUser = Object.assign(state.currentUser, data.currentUser);
+      if (typeof data.isVip === "boolean") state.isVip = data.isVip;
+      if (typeof data.creditsBalance === "number") state.creditsBalance = data.creditsBalance;
+      if (typeof data.freeLikesRemaining === "number") state.freeLikesRemaining = data.freeLikesRemaining;
+      if (typeof data.isFaydaVerified === "boolean") state.isFaydaVerified = data.isFaydaVerified;
+      if (typeof data.invitedFriendsCount === "number") state.invitedFriendsCount = data.invitedFriendsCount;
+      if (typeof data.faydaVerifiedFriendsCount === "number") state.faydaVerifiedFriendsCount = data.faydaVerifiedFriendsCount;
+    }
+  } catch (e) {
+    console.warn("localStorage read failed:", e);
+  }
+}
+
+function updateUserAuthUI() {
+  const loginBtn = document.getElementById("headerLoginBtn");
+  const userProfileBtn = document.getElementById("userProfileBtn");
+  const userHeaderAvatar = document.getElementById("userHeaderAvatar");
+
+  // Settings modal user preview
+  const settingsUserAvatar = document.getElementById("settingsUserAvatar");
+  const settingsDisplayName = document.getElementById("settingsDisplayName");
+  const settingsAgeTag = document.getElementById("settingsAgeTag");
+  const settingsSubTitle = document.getElementById("settingsSubTitle");
+  const settingsFaydaBadge = document.getElementById("settingsFaydaBadge");
+  const settingsTelegramBadge = document.getElementById("settingsTelegramBadge");
+  const settingsVipBadge = document.getElementById("settingsVipBadge");
+
+  // Form inputs in settings
+  const inputUserName = document.getElementById("inputUserName");
+  const inputUserAge = document.getElementById("inputUserAge");
+  const inputUserCity = document.getElementById("inputUserCity");
+  const inputUserFaith = document.getElementById("inputUserFaith");
+  const inputUserOccupation = document.getElementById("inputUserOccupation");
+  const checkUserFasting = document.getElementById("checkUserFasting");
+  const checkUserBuna = document.getElementById("checkUserBuna");
+  const inputUserBio = document.getElementById("inputUserBio");
+
+  // Security elements
+  const secFaydaStatusBadge = document.getElementById("secFaydaStatusBadge");
+  const secFaydaFinText = document.getElementById("secFaydaFinText");
+  const secTelegramStatusBadge = document.getElementById("secTelegramStatusBadge");
+  const secTelegramHandleText = document.getElementById("secTelegramHandleText");
+  const secPhoneText = document.getElementById("secPhoneText");
+  const settingsCreditsVal = document.getElementById("settingsCreditsVal");
+  const settingsVipStatusVal = document.getElementById("settingsVipStatusVal");
+
+  // Header login vs profile avatar toggle
+  if (state.isLoggedIn) {
+    if (loginBtn) loginBtn.style.display = "none";
+    if (userProfileBtn) userProfileBtn.style.display = "inline-flex";
+  } else {
+    if (loginBtn) loginBtn.style.display = "inline-flex";
+    if (userProfileBtn) userProfileBtn.style.display = "none";
+  }
+
+  const u = state.currentUser;
+  if (userHeaderAvatar) userHeaderAvatar.src = u.avatar;
+  if (settingsUserAvatar) settingsUserAvatar.src = u.avatar;
+  if (settingsDisplayName) settingsDisplayName.textContent = u.fullName;
+  if (settingsAgeTag) settingsAgeTag.textContent = u.age;
+  if (settingsSubTitle) settingsSubTitle.textContent = `📍 ${u.city} • ${u.occupation}`;
+
+  if (settingsFaydaBadge) {
+    settingsFaydaBadge.style.display = state.isFaydaVerified ? "inline-flex" : "none";
+  }
+  if (settingsTelegramBadge) {
+    settingsTelegramBadge.textContent = `✈️ ${u.telegram}`;
+    settingsTelegramBadge.style.display = u.isTelegramConnected ? "inline-flex" : "none";
+  }
+  if (settingsVipBadge) {
+    settingsVipBadge.textContent = state.isVip ? "👑 VIP ACTIVE" : "FREE TIER";
+    settingsVipBadge.className = `badge-pill ${state.isVip ? "pill-vip" : "pill-telegram"}`;
+  }
+
+  // Populate form inputs
+  if (inputUserName) inputUserName.value = u.fullName;
+  if (inputUserAge) inputUserAge.value = u.age;
+  if (inputUserCity) inputUserCity.value = u.city;
+  if (inputUserFaith) inputUserFaith.value = u.faith;
+  if (inputUserOccupation) inputUserOccupation.value = u.occupation;
+  if (checkUserFasting) checkUserFasting.checked = u.fasting;
+  if (checkUserBuna) checkUserBuna.checked = u.bunaLover;
+  if (inputUserBio) inputUserBio.value = u.bio;
+
+  // Security elements
+  if (secFaydaFinText) {
+    secFaydaFinText.textContent = state.isFaydaVerified
+      ? `${u.fin.slice(0, 4)} •••• •••• ${u.fin.slice(-4)}`
+      : "Not Linked";
+  }
+  if (secFaydaStatusBadge) {
+    secFaydaStatusBadge.textContent = state.isFaydaVerified ? "Verified ✓" : "Pending";
+    secFaydaStatusBadge.className = state.isFaydaVerified ? "status-verified-pill" : "status-verified-pill telegram-pill";
+  }
+  if (secTelegramHandleText) secTelegramHandleText.textContent = u.telegram;
+  if (secTelegramStatusBadge) {
+    secTelegramStatusBadge.textContent = u.isTelegramConnected ? "Connected ✓" : "Disconnected";
+  }
+  if (secPhoneText) secPhoneText.textContent = `+251 ${u.phone}`;
+  if (settingsCreditsVal) settingsCreditsVal.textContent = `${state.creditsBalance} Credits`;
+  if (settingsVipStatusVal) settingsVipStatusVal.textContent = state.isVip ? "👑 Premium VIP" : "FREE Tier";
+}
 
 // ============================================================================
 // 3. AUDIO SOUND EFFECTS (Web Audio API Synthesizer - Zero External Files)
@@ -471,12 +679,15 @@ const soundFx = {
 // ============================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
+  loadUserSession();
   setupNavigation();
   setupFilters();
   setupDeckControls();
   setupModals();
   setupFaydaModal();
   setupReferralModal();
+  setupSettingsModal();
+  setupAuthModal();
   setupChatHandlers();
   setupLanguageToggle();
   renderSwipeDeck();
@@ -485,6 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderActiveChat();
   updateCreditsUI();
   updateFaydaUI();
+  updateUserAuthUI();
 });
 
 // Toast Notifications
@@ -1613,9 +1825,14 @@ function setupFaydaModal() {
   // Stage 3 Complete
   completeBtn.addEventListener("click", () => {
     state.isFaydaVerified = true;
+    state.currentUser.isFaydaVerified = true;
+    state.currentUser.fin = state.faydaUser.fin;
+    state.currentUser.fullName = state.faydaUser.fullName;
     state.creditsBalance += 10; // Welcome Bonus
     updateFaydaUI();
     updateCreditsUI();
+    updateUserAuthUI();
+    saveUserSession();
     modal.style.display = "none";
 
     showToast(
@@ -1803,4 +2020,305 @@ function updateCreditsUI() {
   if (sideStatFriends) sideStatFriends.textContent = state.faydaVerifiedFriendsCount;
   if (modalStatFriends) modalStatFriends.textContent = state.invitedFriendsCount;
   if (modalStatVerified) modalStatVerified.textContent = state.faydaVerifiedFriendsCount;
+}
+
+// ============================================================================
+// 14. USER SETTINGS & PROFILE VERIFICATION CENTER
+// ============================================================================
+
+function setupSettingsModal() {
+  const modal = document.getElementById("userSettingsModalBackdrop");
+  const openBtn = document.getElementById("userProfileBtn");
+  const closeBtn = document.getElementById("closeSettingsModalBtn");
+
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      updateUserAuthUI();
+      modal.style.display = "flex";
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+
+  // Settings Tabs Switching
+  const tabs = modal.querySelectorAll(".tab-btn");
+  tabs.forEach(btn => {
+    btn.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      btn.classList.add("active");
+
+      const targetId = btn.getAttribute("data-tab");
+      modal.querySelectorAll(".settings-tab-content").forEach(c => {
+        c.style.display = "none";
+      });
+      const activeContent = document.getElementById(targetId);
+      if (activeContent) activeContent.style.display = "block";
+    });
+  });
+
+  // Change Profile Avatar Photo Cycle
+  const changeAvatarBtn = document.getElementById("btnChangeAvatar");
+  const avatarList = [
+    "assets/ethiopian_man_profile1_1792309463785.jpg",
+    "assets/ethiopian_man_profile2_1792309893956.jpg",
+    "assets/ethiopian_woman_profile1_1792309419035.jpg",
+    "assets/ethiopian_woman_profile2_1792309642691.jpg",
+    "assets/ethiopian_woman_profile3_1792309910865.jpg"
+  ];
+  let avatarIndex = 0;
+  if (changeAvatarBtn) {
+    changeAvatarBtn.addEventListener("click", () => {
+      avatarIndex = (avatarIndex + 1) % avatarList.length;
+      state.currentUser.avatar = avatarList[avatarIndex];
+      updateUserAuthUI();
+      saveUserSession();
+      soundFx.playBunaChime();
+      showToast(state.currentLang === "am" ? "📷 የፕሮፋይል ፎቶ ተቀይሯል!" : "📷 Profile photo updated!", "📷");
+    });
+  }
+
+  // Edit Profile Form Submission (Persists to localStorage)
+  const profileForm = document.getElementById("editProfileForm");
+  if (profileForm) {
+    profileForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      state.currentUser.fullName = document.getElementById("inputUserName").value.trim() || state.currentUser.fullName;
+      state.currentUser.age = parseInt(document.getElementById("inputUserAge").value, 10) || state.currentUser.age;
+      state.currentUser.city = document.getElementById("inputUserCity").value;
+      state.currentUser.faith = document.getElementById("inputUserFaith").value;
+      state.currentUser.occupation = document.getElementById("inputUserOccupation").value.trim() || state.currentUser.occupation;
+      state.currentUser.fasting = document.getElementById("checkUserFasting").checked;
+      state.currentUser.bunaLover = document.getElementById("checkUserBuna").checked;
+      state.currentUser.bio = document.getElementById("inputUserBio").value.trim() || state.currentUser.bio;
+
+      saveUserSession();
+      updateUserAuthUI();
+      soundFx.playBunaChime();
+      showToast(
+        state.currentLang === "am"
+          ? "✅ የፕሮፋይል መረጃዎ በተሳካ ሁኔታ ተቀምጧል!"
+          : "✅ Profile changes saved successfully to your device!",
+        "✅"
+      );
+    });
+  }
+
+  // Fayda Re-verification Trigger
+  const btnReverifyFayda = document.getElementById("btnReverifyFayda");
+  if (btnReverifyFayda) {
+    btnReverifyFayda.addEventListener("click", () => {
+      modal.style.display = "none";
+      const faydaModal = document.getElementById("faydaModalBackdrop");
+      if (faydaModal) faydaModal.style.display = "flex";
+    });
+  }
+
+  // Telegram Account Switcher / Verification
+  const btnManageTelegram = document.getElementById("btnManageTelegram");
+  if (btnManageTelegram) {
+    btnManageTelegram.addEventListener("click", () => {
+      const currentHandle = state.currentUser.telegram || "@Habte338";
+      const newHandle = prompt(
+        state.currentLang === "am"
+          ? "የቴሌግራም መለያዎን (Telegram Username) ያስገቡ (ምሳሌ፡ @Habte338)፦"
+          : "Enter your Telegram username (e.g. @Habte338):",
+        currentHandle
+      );
+      if (newHandle && newHandle.trim()) {
+        const formatted = newHandle.trim().startsWith("@") ? newHandle.trim() : `@${newHandle.trim()}`;
+        state.currentUser.telegram = formatted;
+        state.currentUser.isTelegramConnected = true;
+        saveUserSession();
+        updateUserAuthUI();
+        soundFx.playBunaChime();
+        showToast(
+          state.currentLang === "am"
+            ? `✈️ የቴሌግራም መለያ ${formatted} በተሳካ ሁኔታ ተገናኝቷል!`
+            : `✈️ Telegram account ${formatted} successfully connected!`,
+          "✈️"
+        );
+      }
+    });
+  }
+
+  // Dating Preference Buttons (Women / Men / Everyone)
+  const prefBtns = modal.querySelectorAll(".pref-btn");
+  prefBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      prefBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const pref = btn.getAttribute("data-pref");
+      state.genderFilter = pref;
+      state.cardIndex = 0;
+      renderSwipeDeck();
+      showToast(
+        state.currentLang === "am"
+          ? `🎯 የመፈለጊያ ጾታ ምርጫ ተቀይሯል፦ ${btn.textContent}`
+          : `🎯 Seeking preference updated to: ${btn.textContent}`,
+        "🎯"
+      );
+    });
+  });
+
+  // Age Slider Preference
+  const ageRangeInput = document.getElementById("prefAgeRange");
+  const prefAgeVal = document.getElementById("prefAgeVal");
+  if (ageRangeInput && prefAgeVal) {
+    ageRangeInput.addEventListener("input", (e) => {
+      prefAgeVal.textContent = `18 - ${e.target.value} years old`;
+    });
+  }
+
+  // Settings VIP Upgrade
+  const settingsUpgradeVipBtn = document.getElementById("settingsUpgradeVipBtn");
+  if (settingsUpgradeVipBtn) {
+    settingsUpgradeVipBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      openVipModal();
+    });
+  }
+
+  // Settings Redeem Credits Shortcut
+  const settingsRedeemCreditsBtn = document.getElementById("settingsRedeemCreditsBtn");
+  if (settingsRedeemCreditsBtn) {
+    settingsRedeemCreditsBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      const refModal = document.getElementById("referralModalBackdrop");
+      if (refModal) refModal.style.display = "flex";
+    });
+  }
+
+  // Sign Out Button
+  const logoutBtn = document.getElementById("btnLogoutUser");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      state.isLoggedIn = false;
+      saveUserSession();
+      updateUserAuthUI();
+      modal.style.display = "none";
+      showToast(
+        state.currentLang === "am"
+          ? "👋 ከፍቅር አካውንትዎ በተሳካ ሁኔታ ወጥተዋል። በቅርቡ ይመለሱ!"
+          : "👋 Signed out of Fikir. See you soon in Addis Ababa!",
+        "👋"
+      );
+    });
+  }
+}
+
+// ============================================================================
+// 15. WEB LOGIN & TELEGRAM/FAYDA AUTH SYSTEM
+// ============================================================================
+
+function setupAuthModal() {
+  const modal = document.getElementById("authModalBackdrop");
+  const loginNavBtn = document.getElementById("headerLoginBtn");
+  const closeBtn = document.getElementById("closeAuthModalBtn");
+
+  if (loginNavBtn) {
+    loginNavBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+
+  // Telegram Quick 1-Click Authentication
+  const btnTelegram = document.getElementById("btnTelegramQuickLogin");
+  if (btnTelegram) {
+    btnTelegram.addEventListener("click", () => {
+      soundFx.playMatchCelebration();
+      state.isLoggedIn = true;
+      state.currentUser.telegram = "@Habte338";
+      state.currentUser.isTelegramConnected = true;
+      state.isFaydaVerified = true;
+      saveUserSession();
+      updateUserAuthUI();
+      modal.style.display = "none";
+      showToast(
+        state.currentLang === "am"
+          ? "🎉 እንኳን ደህና መጡ ሀብተ (@Habte338)! በቴሌግራም በተሳካ ሁኔታ ገብተዋል።"
+          : "🎉 Welcome back Habte (@Habte338)! Logged in via 1-Click Telegram.",
+        "✈️"
+      );
+    });
+  }
+
+  // Phone / Fayda Login Form Submit
+  const authForm = document.getElementById("authLoginForm");
+  if (authForm) {
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const phoneVal = document.getElementById("authLoginPhone").value.trim();
+      state.isLoggedIn = true;
+      if (phoneVal) state.currentUser.phone = phoneVal;
+      saveUserSession();
+      updateUserAuthUI();
+      modal.style.display = "none";
+      soundFx.playBunaChime();
+      showToast(
+        state.currentLang === "am"
+          ? "✨ በተሳካ ሁኔታ ገብተዋል! መልካም የፍቅር ጊዜ።"
+          : "✨ Successfully authenticated with Fikir!",
+        "✨"
+      );
+    });
+  }
+
+  // Quick Demo Accounts
+  const demoHabte = document.getElementById("btnDemoHabte");
+  if (demoHabte) {
+    demoHabte.addEventListener("click", () => {
+      state.isLoggedIn = true;
+      state.currentUser.fullName = "Habte Mikael";
+      state.currentUser.telegram = "@Habte338";
+      state.currentUser.isTelegramConnected = true;
+      state.isFaydaVerified = true;
+      state.currentUser.fin = "4820 9182 3410";
+      saveUserSession();
+      updateUserAuthUI();
+      modal.style.display = "none";
+      soundFx.playBunaChime();
+      showToast(
+        state.currentLang === "am"
+          ? "🇪🇹 በሀብተ አካውንት ገብተዋል (በፋይዳና ቴሌግራም የተረጋገጠ)"
+          : "🇪🇹 Logged in as Habte (Fayda & Telegram Verified)!",
+        "🇪🇹"
+      );
+    });
+  }
+
+  const demoGuest = document.getElementById("btnDemoGuest");
+  if (demoGuest) {
+    demoGuest.addEventListener("click", () => {
+      state.isLoggedIn = true;
+      state.currentUser.fullName = "Guest Explorer";
+      state.isFaydaVerified = false;
+      saveUserSession();
+      updateUserAuthUI();
+      modal.style.display = "none";
+      showToast(
+        state.currentLang === "am"
+          ? "👤 እንደ እንግዳ ገብተዋል። ለሙሉ ክብር በፋይዳ ያረጋግጡ!"
+          : "👤 Browsing as Guest. Verify with Fayda to unlock full access!",
+        "👤"
+      );
+    });
+  }
 }

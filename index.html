@@ -86,8 +86,13 @@
           <span class="lang-code" id="langAm">አማ</span>
         </div>
 
-        <!-- User Profile Avatar -->
-        <button class="user-avatar-btn" id="userProfileBtn" aria-label="My Profile">
+        <!-- Sign In Button (shown when logged out) -->
+        <button class="btn btn-outline btn-signin-nav" id="headerLoginBtn" style="display: none;">
+          <span data-i18n="signIn">Sign In</span>
+        </button>
+
+        <!-- User Profile Avatar (shown when logged in) -->
+        <button class="user-avatar-btn" id="userProfileBtn" aria-label="My Profile & Settings" title="Profile Settings & Verifications">
           <img src="assets/ethiopian_man_profile1_1792309463785.jpg" alt="User Profile" class="user-avatar-img" id="userHeaderAvatar">
           <span class="online-dot"></span>
         </button>
@@ -896,6 +901,283 @@
             </div>
             <button class="btn-redeem btn-redeem-vip" data-cost="20" data-reward="vip" data-amount="1" data-i18n="redeem">Redeem</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 6: USER SETTINGS & VERIFICATION CENTER ==================== -->
+  <div class="modal-backdrop" id="userSettingsModalBackdrop" style="display: none;">
+    <div class="modal-dialog settings-modal" role="dialog" aria-modal="true">
+      <button class="modal-close-btn" id="closeSettingsModalBtn" aria-label="Close modal">✕</button>
+
+      <!-- Settings Header User Banner -->
+      <div class="settings-user-header">
+        <div class="settings-avatar-wrap">
+          <img src="assets/ethiopian_man_profile1_1792309463785.jpg" alt="User Avatar" class="settings-avatar-img" id="settingsUserAvatar">
+          <button class="btn-change-avatar" id="btnChangeAvatar" title="Change Avatar Photo">📷</button>
+        </div>
+        <div class="settings-user-meta">
+          <div class="settings-name-row">
+            <h2 id="settingsDisplayName">Abebe Kebede</h2>
+            <span class="settings-age-tag" id="settingsAgeTag">26</span>
+          </div>
+          <p class="settings-sub" id="settingsSubTitle">📍 Addis Ababa, Bole • Software Engineer</p>
+
+          <div class="settings-badges-row">
+            <span class="badge-pill pill-fayda" id="settingsFaydaBadge">🛡️ Fayda Verified</span>
+            <span class="badge-pill pill-telegram" id="settingsTelegramBadge">✈️ @Habte338</span>
+            <span class="badge-pill pill-vip" id="settingsVipBadge">FREE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Navigation Tabs -->
+      <div class="settings-nav-tabs">
+        <button class="tab-btn active" data-tab="tabProfile" id="tabBtnProfile" data-i18n="tabEditProfile">Edit Profile</button>
+        <button class="tab-btn" data-tab="tabSecurity" id="tabBtnSecurity" data-i18n="tabSecurity">Fayda & Telegram</button>
+        <button class="tab-btn" data-tab="tabPrefs" id="tabBtnPrefs" data-i18n="tabPreferences">Preferences</button>
+      </div>
+
+      <!-- Tab 1: Edit Profile -->
+      <div class="settings-tab-content active" id="tabProfile">
+        <form id="editProfileForm">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="inputUserName" data-i18n="fullName">Full Name (ሙሉ ስም):</label>
+              <input type="text" id="inputUserName" class="form-control" value="Abebe Kebede">
+            </div>
+            <div class="form-group">
+              <label for="inputUserAge" data-i18n="age">Age (ዕድሜ):</label>
+              <input type="number" id="inputUserAge" class="form-control" value="26" min="18" max="75">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="inputUserCity" data-i18n="cityDistrict">Location (ከተማ / ክፍለ ከተማ):</label>
+              <select id="inputUserCity" class="form-control">
+                <option value="Addis Ababa - Bole">Addis Ababa - Bole (ቦሌ)</option>
+                <option value="Addis Ababa - Kazanchis">Addis Ababa - Kazanchis (ካዛንቺስ)</option>
+                <option value="Addis Ababa - Piassa">Addis Ababa - Piassa (ፒያሳ)</option>
+                <option value="Addis Ababa - CMC">Addis Ababa - CMC (ሲኤምሲ)</option>
+                <option value="Hawassa">Hawassa (ሐዋሳ)</option>
+                <option value="Bahir Dar">Bahir Dar (ባሕር ዳር)</option>
+                <option value="Gondar">Gondar (ጎንደር)</option>
+                <option value="Diaspora">Diaspora Returnee (ዲያስፖራ)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputUserFaith" data-i18n="faithBelief">Faith (እምነት):</label>
+              <select id="inputUserFaith" class="form-control">
+                <option value="Orthodox">Ethiopian Orthodox (ኦርቶዶክስ)</option>
+                <option value="Muslim">Muslim (ሙስሊም)</option>
+                <option value="Protestant">Protestant (ፕሮቴስታንት)</option>
+                <option value="Catholic">Catholic (ካቶሊክ)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputUserOccupation" data-i18n="occupation">Occupation / Career:</label>
+            <input type="text" id="inputUserOccupation" class="form-control" value="Software Developer & Tech Creator">
+          </div>
+
+          <div class="form-toggles-row">
+            <label class="toggle-checkbox-label">
+              <input type="checkbox" id="checkUserFasting" checked>
+              <span data-i18n="fastingCheckbox">Fasting Friendly (ጾመኛ ነኝ 🥗)</span>
+            </label>
+
+            <label class="toggle-checkbox-label">
+              <input type="checkbox" id="checkUserBuna" checked>
+              <span data-i18n="bunaCheckbox">Traditional Buna Lover (የባህል ቡና ወዳጅ ☕)</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="inputUserBio" data-i18n="bioLabel">About Me (ስለ እኔ):</label>
+            <textarea id="inputUserBio" class="form-control textarea-bio" rows="3">Tech builder in Addis Ababa. Love weekend hikes at Entoto, traditional Buna ceremonies, and soulful acoustic Kirar music. Looking for an authentic Habesha connection!</textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-large" id="btnSaveProfile">
+            <span data-i18n="saveChanges">Save Profile Changes (መረጃ መዝግብ)</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Tab 2: Fayda National ID & Telegram Security -->
+      <div class="settings-tab-content" id="tabSecurity" style="display: none;">
+        <!-- Fayda National ID Status Card -->
+        <div class="security-item-card">
+          <div class="security-card-header">
+            <div class="sec-icon-wrap fayda-sec-bg">🛡️</div>
+            <div class="sec-title-meta">
+              <strong>Ethiopia Fayda National ID (ፋይዳ)</strong>
+              <small>Civil Identity Registry • e-KYC Verification</small>
+            </div>
+            <span class="status-verified-pill" id="secFaydaStatusBadge">Verified ✓</span>
+          </div>
+          <div class="sec-card-details">
+            <div class="sec-detail-line">
+              <span>Fayda FIN:</span>
+              <strong id="secFaydaFinText">4820 •••• •••• 3410</strong>
+            </div>
+            <div class="sec-detail-line">
+              <span>National Status:</span>
+              <span class="green-text">Citizen Record Confirmed</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-block btn-small" id="btnReverifyFayda" data-i18n="manageFayda">
+            Manage Fayda ID Certificate
+          </button>
+        </div>
+
+        <!-- Telegram Connection Card -->
+        <div class="security-item-card">
+          <div class="security-card-header">
+            <div class="sec-icon-wrap telegram-sec-bg">✈️</div>
+            <div class="sec-title-meta">
+              <strong>Telegram Verification (ቴሌግራም)</strong>
+              <small>Instant Ethiopian login & secure notifications</small>
+            </div>
+            <span class="status-verified-pill telegram-pill" id="secTelegramStatusBadge">Connected ✓</span>
+          </div>
+          <div class="sec-card-details">
+            <div class="sec-detail-line">
+              <span>Telegram Account:</span>
+              <strong id="secTelegramHandleText">@Habte338</strong>
+            </div>
+            <div class="sec-detail-line">
+              <span>Two-Factor Auth:</span>
+              <span class="green-text">Active via Telegram App</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-block btn-small" id="btnManageTelegram" data-i18n="changeTelegram">
+            Switch Telegram Account
+          </button>
+        </div>
+
+        <!-- Phone Verification -->
+        <div class="security-item-card">
+          <div class="security-card-header">
+            <div class="sec-icon-wrap phone-sec-bg">📱</div>
+            <div class="sec-title-meta">
+              <strong>Mobile Phone Number</strong>
+              <small>Linked with Telebirr & CBE Birr</small>
+            </div>
+            <span class="status-verified-pill">Active</span>
+          </div>
+          <div class="sec-card-details">
+            <div class="sec-detail-line">
+              <span>Phone:</span>
+              <strong id="secPhoneText">+251 911 234 567</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Dating Preferences -->
+      <div class="settings-tab-content" id="tabPrefs" style="display: none;">
+        <div class="form-group">
+          <label data-i18n="interestedIn">Interested in Meeting:</label>
+          <div class="pref-btn-group">
+            <button type="button" class="pref-btn active" data-pref="female">Women (ሴቶች)</button>
+            <button type="button" class="pref-btn" data-pref="male">Men (ወንዶች)</button>
+            <button type="button" class="pref-btn" data-pref="all">Everyone</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="ageRange">Age Range Preference (18 - 40):</label>
+          <div class="range-display-row">
+            <span id="prefAgeVal">20 - 32 years old</span>
+          </div>
+          <input type="range" class="form-range" min="18" max="50" value="32" id="prefAgeRange">
+        </div>
+
+        <div class="account-actions-box">
+          <div class="account-row">
+            <span>Free Credits:</span>
+            <strong id="settingsCreditsVal" class="gold-val">15 Credits</strong>
+            <button class="btn btn-outline btn-mini" id="settingsRedeemCreditsBtn">Redeem / Share</button>
+          </div>
+          <div class="account-row">
+            <span>VIP Status:</span>
+            <strong id="settingsVipStatusVal">FREE Tier</strong>
+            <button class="btn btn-vip-cta btn-mini" id="settingsUpgradeVipBtn">Upgrade</button>
+          </div>
+        </div>
+
+        <!-- Logout Button -->
+        <button type="button" class="btn btn-outline btn-block btn-logout" id="btnLogoutUser">
+          <span>🚪</span> <span data-i18n="signOut">Sign Out of Fikir (ውጣ)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 7: WEB LOGIN & TELEGRAM/FAYDA AUTH MODAL ==================== -->
+  <div class="modal-backdrop" id="authModalBackdrop" style="display: none;">
+    <div class="modal-dialog auth-modal" role="dialog" aria-modal="true">
+      <button class="modal-close-btn" id="closeAuthModalBtn" aria-label="Close modal">✕</button>
+
+      <div class="auth-header">
+        <span class="auth-heart-logo">ፍቅር</span>
+        <h2 data-i18n="welcomeBack">Welcome to Fikir (እንኳን ደህና መጡ)</h2>
+        <p data-i18n="authSubtitle">Ethiopia's trusted cultural dating platform with Fayda National ID & Telegram security.</p>
+      </div>
+
+      <!-- Telegram 1-Click Login Button (Primary in Ethiopia) -->
+      <div class="telegram-login-wrapper">
+        <button class="btn btn-telegram-login" id="btnTelegramQuickLogin">
+          <span class="tg-paper-plane">✈️</span>
+          <div>
+            <strong data-i18n="signInTelegram">Continue with Telegram (በቴሌግራም ግባ)</strong>
+            <small data-i18n="instantVerifiedTg">Instant 1-Click Ethiopian Login (@Habte338)</small>
+          </div>
+        </button>
+      </div>
+
+      <div class="auth-divider">
+        <span data-i18n="orPhone">OR LOG IN WITH ETHIOPIAN PHONE / FAYDA ID</span>
+      </div>
+
+      <form id="authLoginForm">
+        <div class="form-group">
+          <label for="authLoginPhone" data-i18n="phoneOrFayda">Mobile Number or Fayda FIN:</label>
+          <div class="phone-input-wrap">
+            <span class="country-prefix">+251</span>
+            <input type="tel" id="authLoginPhone" class="form-control" placeholder="911 234 567" value="911 234 567" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="authLoginPassword" data-i18n="smsCodeOrPin">SMS Passcode or Fayda e-Signet OTP:</label>
+          <input type="password" id="authLoginPassword" class="form-control" placeholder="••••••" value="589214" required>
+        </div>
+
+        <div class="form-remember-row">
+          <label class="remember-label">
+            <input type="checkbox" id="authRememberMe" checked>
+            <span data-i18n="rememberDevice">Remember on this device (አስታውሰኝ)</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-large btn-glow" id="btnAuthSubmit">
+          <span data-i18n="logInNow">Log In to Fikir (ግባ)</span>
+        </button>
+      </form>
+
+      <div class="quick-demo-accounts">
+        <small data-i18n="quickDemoAccounts">Quick Access Demo Accounts:</small>
+        <div class="demo-chips-row">
+          <button type="button" class="demo-chip" id="btnDemoHabte">
+            🇪🇹 Habte (Fayda & Telegram Verified)
+          </button>
+          <button type="button" class="demo-chip" id="btnDemoGuest">
+            👤 Browse as Guest
+          </button>
         </div>
       </div>
     </div>
